@@ -1,26 +1,302 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ===========================================
+   DESIGN SYSTEM - Auntie Huda
+   Priority: Clarity > Consistency > Accessibility > Simplicity
+   =========================================== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Arabic Font */
+@layer base {
+  html {
+    font-family: var(--font-arabic), var(--font-sans), system-ui, sans-serif;
   }
 }
 
+:root {
+  /* Semantic Colors - WCAG AA compliant */
+  --bg-primary: #0c0814;
+  --bg-secondary: #150f1f;
+  --bg-elevated: #1e1529;
+  
+  /* Text - All meet 4.5:1 contrast minimum */
+  --text-primary: #ffffff;
+  --text-secondary: #c4b5d4;
+  --text-muted: #8b7a9e;
+  
+  /* Brand */
+  --accent-primary: #a855f7;
+  --accent-secondary: #ec4899;
+  --accent-gradient: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  
+  /* Semantic */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  
+  /* Spacing Scale (consistent 4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-inter);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* ===========================================
+   BASE STYLES
+   =========================================== */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+}
+
+/* ===========================================
+   LAYOUT COMPONENTS
+   =========================================== */
+
+.app-bg {
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  position: relative;
+}
+
+/* Subtle stars - simplified for performance */
+.app-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 50px 50px, rgba(255,255,255,0.15), transparent),
+    radial-gradient(1px 1px at 150px 120px, rgba(255,255,255,0.1), transparent),
+    radial-gradient(1px 1px at 250px 80px, rgba(255,255,255,0.12), transparent);
+  background-size: 300px 200px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Legacy support */
+.cosmic-bg {
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  position: relative;
+}
+
+/* ===========================================
+   CARD COMPONENTS - Simplified
+   =========================================== */
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  border-radius: var(--radius-md);
+}
+
+.card-glass {
+  background: rgba(30, 21, 41, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-md);
+}
+
+/* Legacy glass classes */
+.glass-card {
+  background: rgba(30, 21, 41, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.glass-card-strong {
+  background: rgba(30, 21, 41, 0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+/* ===========================================
+   INTERACTIVE ELEMENTS
+   =========================================== */
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: white;
+  font-weight: 600;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--text-primary);
+}
+
+/* ===========================================
+   VISUAL EFFECTS - Minimal & Purposeful
+   =========================================== */
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Legacy glow classes */
+.purple-glow {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+.pink-glow {
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+}
+
+.gold-glow {
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+}
+
+/* ===========================================
+   ANIMATIONS - Subtle & Meaningful
+   =========================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* ===========================================
+   UTILITIES
+   =========================================== */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Text utilities for accessibility */
+.text-high-contrast {
+  color: var(--text-primary);
+}
+
+.text-medium-contrast {
+  color: var(--text-secondary);
+}
+
+.text-low-contrast {
+  color: var(--text-muted);
+}
+
+/* ===========================================
+   DESKTOP ENHANCEMENTS
+   =========================================== */
+
+@media (min-width: 1024px) {
+  /* Floating panel shadows */
+  .floating-panel {
+    background: #12091c;
+    border-radius: 16px;
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(168, 85, 247, 0.1);
+  }
+
+  /* Enhanced hover states for desktop */
+  .desktop-hover:hover {
+    background: rgba(168, 85, 247, 0.1);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+
+  /* Smooth transitions */
+  * {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-timing-function: ease;
+    transition-duration: 150ms;
+  }
+}
+
+/* ===========================================
+   RESPONSIVE TYPOGRAPHY
+   =========================================== */
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 17px;
+  }
 }
