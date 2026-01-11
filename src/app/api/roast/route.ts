@@ -10,7 +10,7 @@ const openai = new OpenAI({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { message, dailyTotal = 0, currency = "SAR", imageBase64, savingsGoal } = body;
+    const { message, dailyTotal = 0, currency = "SAR", imageBase64, savingsGoal, language = "en" } = body;
 
     if (!message && !imageBase64) {
       return NextResponse.json(
@@ -33,10 +33,11 @@ export async function POST(request: NextRequest) {
           {
             type: "text",
             text: extractTransactionPrompt(
-              message || "Extract the transaction from this bank SMS screenshot",
+              message || "Extract the transaction from this receipt/bank SMS screenshot",
               dailyTotal,
               currency,
-              savingsGoal
+              savingsGoal,
+              language
             ),
           },
           {
@@ -45,6 +46,7 @@ export async function POST(request: NextRequest) {
               url: imageBase64.startsWith("data:")
                 ? imageBase64
                 : `data:image/jpeg;base64,${imageBase64}`,
+              detail: "high",
             },
           },
         ],
@@ -52,7 +54,7 @@ export async function POST(request: NextRequest) {
     } else {
       messages.push({
         role: "user",
-        content: extractTransactionPrompt(message, dailyTotal, currency, savingsGoal),
+        content: extractTransactionPrompt(message, dailyTotal, currency, savingsGoal, language),
       });
     }
 

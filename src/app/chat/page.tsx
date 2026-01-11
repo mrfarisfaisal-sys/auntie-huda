@@ -9,7 +9,6 @@ import {
   Onboarding,
   InsightsSheet,
   AchievementsSheet,
-  QuickActions,
   StreakBanner,
   ShareCard,
   DailyChallenge,
@@ -21,6 +20,7 @@ import {
 } from "@/components";
 import { useDailySpending, useChatHistory } from "@/hooks/useLocalStorage";
 import { RoastResponse } from "@/types";
+import { useLanguage } from "@/lib/i18n";
 
 const STORAGE_KEY_USER = "auntie_huda_user";
 
@@ -45,6 +45,7 @@ interface UserSettings {
 export default function Home() {
   const { spending, addTransaction, resetSpending } = useDailySpending();
   const { messages, addMessage, clearHistory } = useChatHistory();
+  const { language } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showInsights, setShowInsights] = useState(false);
@@ -226,6 +227,7 @@ export default function Home() {
           imageBase64,
           dailyTotal: spending.total,
           currency: userSettings.currency,
+          language,
           savingsGoal: userSettings.savingsGoalName ? {
             name: userSettings.savingsGoalName,
             amount: userSettings.savingsGoalAmount,
@@ -341,8 +343,7 @@ export default function Home() {
               <div ref={messagesEndRef} />
             </div>
 
-            <QuickActions onSelect={handleQuickAction} />
-            <ChatInput onSend={handleSend} isLoading={isLoading} />
+            <ChatInput onSend={handleSend} isLoading={isLoading} currency={userSettings.currency} />
           </div>
         </main>
 

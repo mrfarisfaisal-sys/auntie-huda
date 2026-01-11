@@ -59,7 +59,19 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans), system-ui, sans-serif;
   min-height: 100dvh;
+}
+
+/* No scroll layout for chat/app pages */
+.no-scroll {
   overflow: hidden;
+  height: 100dvh;
+}
+
+/* Scrollable layout for landing page */
+.scrollable {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ===========================================
