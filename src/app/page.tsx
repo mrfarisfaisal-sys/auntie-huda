@@ -25,28 +25,28 @@ import { AuthButton } from "@/components/AuthButton";
 
 const FEATURES = {
   en: [
-    { icon: MessageCircle, title: "Chat Like Family", description: "Talk to Auntie Huda like you're in the family WhatsApp group. She understands Arabizi and local slang.", color: "from-purple-500 to-violet-600" },
-    { icon: Camera, title: "SMS Screenshot Magic", description: "Just snap your bank SMS notification. AI extracts the transaction instantly - no typing needed.", color: "from-blue-500 to-cyan-500" },
-    { icon: TrendingDown, title: "Track Every Fils", description: "Daily spending limits, category breakdown, and real-time budget tracking across SAR, AED, EGP & more.", color: "from-green-500 to-emerald-500" },
-    { icon: Trophy, title: "Gamified Savings", description: "Earn badges, maintain streaks, and compete with friends. Make saving money actually fun.", color: "from-yellow-500 to-orange-500" },
-    { icon: Shield, title: "Privacy First", description: "Your data stays on your device. No bank connections needed. We never see your actual transactions.", color: "from-red-500 to-pink-500" },
-    { icon: Zap, title: "Instant Roasts", description: "Get real-time feedback on every purchase. Wasteful spending? Auntie won't hold back!", color: "from-indigo-500 to-purple-500" },
+    { icon: Zap, title: "Instant Roasts", description: "Get roasted in real-time. Bought coffee? Auntie has opinions. Wasteful spending triggers savage (but loving) responses.", color: "from-purple-500 to-violet-600" },
+    { icon: Camera, title: "Receipt Scanner", description: "Snap a receipt, get roasted. AI extracts merchant, amount, and items — then judges you accordingly.", color: "from-blue-500 to-cyan-500" },
+    { icon: MessageCircle, title: "Share Your Roasts", description: "One-tap share to Instagram or WhatsApp. Your friends need to see what Auntie said about your Talabat habit.", color: "from-pink-500 to-rose-500" },
+    { icon: Trophy, title: "Streaks & Badges", description: "Like Duolingo, but for your wallet. Miss a day of logging? Auntie notices. Keep your streak alive.", color: "from-yellow-500 to-orange-500" },
+    { icon: TrendingDown, title: "Savings Goals", description: "Tell Auntie what you're saving for. She'll remind you every time you waste money on things that aren't your goal.", color: "from-green-500 to-emerald-500" },
+    { icon: Shield, title: "No Bank Connection", description: "We never connect to your bank. Your data stays on your device. Auntie judges, but she doesn't spy.", color: "from-red-500 to-pink-500" },
   ],
   ar: [
-    { icon: MessageCircle, title: "دردشة عائلية", description: "تكلم مع خالتك هدى مثل قروب العائلة بالواتساب. تفهم العربيزي واللهجات المحلية.", color: "from-purple-500 to-violet-600" },
-    { icon: Camera, title: "سحر صور الرسائل", description: "صور رسالة البنك وخلاص. الذكاء الاصطناعي يستخرج المعاملة تلقائياً.", color: "from-blue-500 to-cyan-500" },
-    { icon: TrendingDown, title: "تتبع كل فلس", description: "ميزانية يومية، تصنيف المصاريف، وتتبع لحظي بكل العملات.", color: "from-green-500 to-emerald-500" },
-    { icon: Trophy, title: "توفير ممتع", description: "اكسب شارات، حافظ على الستريك، ونافس أصحابك. خل التوفير ممتع!", color: "from-yellow-500 to-orange-500" },
-    { icon: Shield, title: "خصوصية أولاً", description: "بياناتك تبقى على جهازك. ما نحتاج ربط بنكي. ما نشوف معاملاتك أبداً.", color: "from-red-500 to-pink-500" },
-    { icon: Zap, title: "ردود فورية", description: "احصل على رد فوري على كل شراء. مصروف زايد؟ خالتك ما تسكت!", color: "from-indigo-500 to-purple-500" },
+    { icon: Zap, title: "توبيخ فوري", description: "احصل على توبيخ لحظي. اشتريت قهوة؟ خالتك عندها رأي. الصرف الزايد يجيب ردود قاسية (بحب).", color: "from-purple-500 to-violet-600" },
+    { icon: Camera, title: "ماسح الفواتير", description: "صور الفاتورة، واحصل على توبيخ. الذكاء الاصطناعي يستخرج التفاصيل ويحكم عليك.", color: "from-blue-500 to-cyan-500" },
+    { icon: MessageCircle, title: "شارك توبيخك", description: "شارك بضغطة واحدة على انستغرام أو واتساب. أصحابك لازم يشوفون شو قالت خالتك!", color: "from-pink-500 to-rose-500" },
+    { icon: Trophy, title: "ستريك وشارات", description: "مثل دوولينجو، بس لمحفظتك. فوت يوم؟ خالتك تلاحظ. حافظ على سلسلتك.", color: "from-yellow-500 to-orange-500" },
+    { icon: TrendingDown, title: "أهداف التوفير", description: "قول لخالتك على شو توفر. بتذكرك كل ما صرفت على شي مو هدفك.", color: "from-green-500 to-emerald-500" },
+    { icon: Shield, title: "بدون ربط بنكي", description: "ما نربط ببنكك أبداً. بياناتك تبقى على جهازك. خالتك تحكم، بس ما تتجسس.", color: "from-red-500 to-pink-500" },
   ],
   fr: [
-    { icon: MessageCircle, title: "Discutez en Famille", description: "Parlez à Tante Huda comme dans le groupe WhatsApp familial. Elle comprend l'argot local.", color: "from-purple-500 to-violet-600" },
-    { icon: Camera, title: "Magie des Screenshots", description: "Capturez votre SMS bancaire. L'IA extrait la transaction instantanément.", color: "from-blue-500 to-cyan-500" },
-    { icon: TrendingDown, title: "Suivez Chaque Centime", description: "Limites quotidiennes, catégories de dépenses, et suivi en temps réel.", color: "from-green-500 to-emerald-500" },
-    { icon: Trophy, title: "Épargne Gamifiée", description: "Gagnez des badges, maintenez vos séries, et défiez vos amis.", color: "from-yellow-500 to-orange-500" },
-    { icon: Shield, title: "Vie Privée d'Abord", description: "Vos données restent sur votre appareil. Pas de connexion bancaire.", color: "from-red-500 to-pink-500" },
-    { icon: Zap, title: "Critiques Instantanées", description: "Obtenez un retour instantané sur chaque achat. Dépense inutile? Tante ne se retient pas!", color: "from-indigo-500 to-purple-500" },
+    { icon: Zap, title: "Critiques Instantanées", description: "Faites-vous gronder en temps réel. Acheté un café? Tante a des opinions. Les dépenses inutiles déclenchent des réponses sauvages.", color: "from-purple-500 to-violet-600" },
+    { icon: Camera, title: "Scanner de Reçus", description: "Capturez un reçu, faites-vous gronder. L'IA extrait le marchand et le montant — puis vous juge.", color: "from-blue-500 to-cyan-500" },
+    { icon: MessageCircle, title: "Partagez Vos Critiques", description: "Partagez en un clic sur Instagram ou WhatsApp. Vos amis doivent voir ce que Tante a dit!", color: "from-pink-500 to-rose-500" },
+    { icon: Trophy, title: "Séries & Badges", description: "Comme Duolingo, mais pour votre portefeuille. Manqué un jour? Tante remarque. Gardez votre série.", color: "from-yellow-500 to-orange-500" },
+    { icon: TrendingDown, title: "Objectifs d'Épargne", description: "Dites à Tante pour quoi vous épargnez. Elle vous le rappellera chaque fois que vous gaspillez.", color: "from-green-500 to-emerald-500" },
+    { icon: Shield, title: "Pas de Connexion Bancaire", description: "Nous ne nous connectons jamais à votre banque. Vos données restent sur votre appareil.", color: "from-red-500 to-pink-500" },
   ],
 };
 
@@ -94,19 +94,19 @@ const STATS = {
 
 const PRICING = {
   en: [
-    { name: "Free", price: "0", description: "Perfect for getting started", features: ["Unlimited roasts from Auntie", "Basic spending tracking", "Daily budget alerts", "3 screenshot scans/day", "Basic achievements"], cta: "Start Free", popular: false },
-    { name: "Premium", price: "9.99", period: "/month", description: "For serious savers", features: ["Everything in Free", "Unlimited screenshot scans", "Advanced insights & charts", "Family group challenges", "Custom savings goals", "Export spending reports", "Priority support", "No ads forever"], cta: "Start 7-Day Trial", popular: true },
-    { name: "Family", price: "19.99", period: "/month", description: "Up to 6 family members", features: ["Everything in Premium", "6 family member accounts", "Family leaderboard", "Shared savings goals", "Parent controls", "Family spending insights"], cta: "Start Family Trial", popular: false },
+    { name: "Free", price: "0", description: "Get roasted forever", features: ["10 roasts per day", "Basic expense logging", "Standard Auntie mode", "Share roast cards", "Daily streak tracking"], cta: "Get Roasted Free", popular: false },
+    { name: "Premium", price: "4.99", period: "/month", description: "Unlimited guilt trips", features: ["Everything in Free", "Unlimited roasts", "Receipt scanning (OCR)", "\"Savage Mode\" roasts 🔥", "Weekly roast summary", "Custom savings goals", "No ads forever"], cta: "Unlock Savage Mode", popular: true },
+    { name: "Family", price: "9.99", period: "/month", description: "Gift accountability to your kids", features: ["Everything in Premium", "5 family accounts", "Family leaderboard", "Parent dashboard", "See who's overspending", "Shared savings goals"], cta: "Start Family Plan", popular: false },
   ],
   ar: [
-    { name: "مجاني", price: "0", description: "مثالي للبداية", features: ["ردود غير محدودة من خالتك", "تتبع مصاريف أساسي", "تنبيهات الميزانية اليومية", "3 صور يومياً", "إنجازات أساسية"], cta: "ابدأ مجاناً", popular: false },
-    { name: "بريميوم", price: "9.99", period: "/شهر", description: "للموفرين الجادين", features: ["كل مميزات المجاني", "صور غير محدودة", "تحليلات ورسوم متقدمة", "تحديات عائلية", "أهداف توفير مخصصة", "تصدير التقارير", "دعم أولوية", "بدون إعلانات للأبد"], cta: "جرب 7 أيام مجاناً", popular: true },
-    { name: "عائلي", price: "19.99", period: "/شهر", description: "حتى 6 أفراد", features: ["كل مميزات البريميوم", "6 حسابات عائلية", "ترتيب العائلة", "أهداف توفير مشتركة", "تحكم الوالدين", "تحليلات العائلة"], cta: "جرب العائلي", popular: false },
+    { name: "مجاني", price: "0", description: "احصل على توبيخ للأبد", features: ["10 توبيخات يومياً", "تسجيل مصاريف أساسي", "وضع خالتك العادي", "مشاركة بطاقات التوبيخ", "تتبع الستريك اليومي"], cta: "ابدأ مجاناً", popular: false },
+    { name: "بريميوم", price: "4.99", period: "/شهر", description: "توبيخ غير محدود", features: ["كل مميزات المجاني", "توبيخ غير محدود", "مسح الفواتير (OCR)", "وضع سافج 🔥", "ملخص أسبوعي", "أهداف توفير مخصصة", "بدون إعلانات"], cta: "فعّل وضع سافج", popular: true },
+    { name: "عائلي", price: "9.99", period: "/شهر", description: "أهدِ أولادك المسؤولية", features: ["كل مميزات البريميوم", "5 حسابات عائلية", "ترتيب العائلة", "لوحة الوالدين", "شوف مين يصرف زيادة", "أهداف مشتركة"], cta: "ابدأ العائلي", popular: false },
   ],
   fr: [
-    { name: "Gratuit", price: "0", description: "Parfait pour commencer", features: ["Critiques illimitées de Tante", "Suivi des dépenses basique", "Alertes budget quotidiennes", "3 captures/jour", "Succès basiques"], cta: "Commencer Gratuit", popular: false },
-    { name: "Premium", price: "9.99", period: "/mois", description: "Pour les épargnants sérieux", features: ["Tout du Gratuit", "Captures illimitées", "Analyses avancées", "Défis familiaux", "Objectifs personnalisés", "Export des rapports", "Support prioritaire", "Sans pub pour toujours"], cta: "Essai 7 Jours", popular: true },
-    { name: "Famille", price: "19.99", period: "/mois", description: "Jusqu'à 6 membres", features: ["Tout du Premium", "6 comptes famille", "Classement familial", "Objectifs partagés", "Contrôle parental", "Analyses familiales"], cta: "Essai Famille", popular: false },
+    { name: "Gratuit", price: "0", description: "Faites-vous gronder pour toujours", features: ["10 critiques par jour", "Suivi des dépenses basique", "Mode Tante standard", "Partage des cartes", "Suivi des séries"], cta: "Commencer Gratuit", popular: false },
+    { name: "Premium", price: "4.99", period: "/mois", description: "Culpabilité illimitée", features: ["Tout du Gratuit", "Critiques illimitées", "Scanner de reçus (OCR)", "Mode Savage 🔥", "Résumé hebdomadaire", "Objectifs personnalisés", "Sans pub"], cta: "Débloquer Mode Savage", popular: true },
+    { name: "Famille", price: "9.99", period: "/mois", description: "Offrez la responsabilité à vos enfants", features: ["Tout du Premium", "5 comptes famille", "Classement familial", "Tableau de bord parents", "Voir qui dépense trop", "Objectifs partagés"], cta: "Plan Famille", popular: false },
   ],
 };
 
@@ -146,16 +146,16 @@ export default function LandingPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
-  // Translated content
+  // Translated content - NEW POSITIONING: "Accountability Entertainment" not "Budget App"
   const title = language === "ar" ? "خالتك هدى" : language === "fr" ? "Tante Huda" : "Auntie Huda";
-  const heroTitle1 = language === "ar" ? "خالتك العربية" : language === "fr" ? "Votre Tante Arabe" : "Your Arab Auntie";
-  const heroTitle2 = language === "ar" ? "اللي تحاسبك على مصاريفك" : language === "fr" ? "Qui Critique Vos Dépenses" : "Who Roasts Your Spending";
+  const heroTitle1 = language === "ar" ? "التطبيق المضاد للميزانية" : language === "fr" ? "L'Anti-App Budget" : "The Anti-Budget App";
+  const heroTitle2 = language === "ar" ? "الذنب اللي ينفع فعلاً 🔥" : language === "fr" ? "La Culpabilité Qui Marche 🔥" : "Guilt That Actually Works 🔥";
   const heroSubtitle = language === "ar" 
-    ? "تعرف على خالتك هدى — مستشارتك المالية بالذكاء الاصطناعي اللي تحبك لدرجة تقولك الحقيقة عن مصاريفك."
+    ? "بلا رسوم بيانية. بلا تصنيفات. بس خالتك هدى توبخك لما تصرف غلط. التطبيقات المالية مملة — الذنب ينفع."
     : language === "fr"
-    ? "Découvrez Tante Huda — l'assistante financière IA qui vous aime assez pour vous dire la vérité sur vos dépenses."
-    : "Meet Khaltu Huda — the AI-powered financial assistant who loves you enough to tell you the truth about your spending habits.";
-  const ctaText = language === "ar" ? "ابدأ التوفير الآن — مجاناً" : language === "fr" ? "Commencez à Épargner — Gratuit" : "Start Saving Now — It's Free";
+    ? "Pas de graphiques. Pas de catégories. Juste Tante Huda qui vous gronde quand vous dépensez mal. Les apps budget sont ennuyeuses — la culpabilité marche."
+    : "No charts. No categories. Just Auntie Huda roasting you when you mess up. Budget apps are boring — guilt works.";
+  const ctaText = language === "ar" ? "احصل على أول توبيخ — مجاناً" : language === "fr" ? "Recevez Votre Première Critique — Gratuit" : "Get Your First Roast — It's Free";
   const loginText = language === "ar" ? "تسجيل الدخول" : language === "fr" ? "Connexion" : "Login";
   const tryFreeText = language === "ar" ? "جرب مجاناً" : language === "fr" ? "Essayer Gratuit" : "Try Free";
   const featuresNav = language === "ar" ? "المميزات" : language === "fr" ? "Fonctionnalités" : "Features";
@@ -171,8 +171,8 @@ export default function LandingPage() {
   const faqs = FAQS[language] || FAQS.en;
 
   // Section titles
-  const featuresTitle = language === "ar" ? "كل اللي تحتاجه لتوفر مثل المحترفين" : language === "fr" ? "Tout pour Épargner Comme un Pro" : "Everything You Need to Save Like a Pro";
-  const featuresSubtitle = language === "ar" ? "خالتك هدى تجيك بكل الأدوات لتتبع وتحلل وتحسن مصاريفك — مع جرعة صحية من الحب القاسي." : language === "fr" ? "Tante Huda vient avec tous les outils pour suivre et améliorer vos dépenses — avec une dose d'amour dur." : "Auntie Huda comes with all the tools to track, analyze, and improve your spending habits — with a healthy dose of tough love.";
+  const featuresTitle = language === "ar" ? "ليش الذنب أفضل من الرسوم البيانية" : language === "fr" ? "Pourquoi la Culpabilité Bat les Graphiques" : "Why Guilt Beats Spreadsheets";
+  const featuresSubtitle = language === "ar" ? "التطبيقات المالية تفشل لأنها مملة. خالتك هدى تستخدم العاطفة — لأن الذنب يغير السلوك." : language === "fr" ? "Les apps budget échouent parce qu'elles sont ennuyeuses. Tante utilise l'émotion — parce que la culpabilité change le comportement." : "Budget apps fail because they're boring. Auntie uses emotion — because guilt changes behavior.";
   const howItWorksTitle = language === "ar" ? "كيف تعمل" : language === "fr" ? "Comment Ça Marche" : "How It Works";
   const howItWorksSubtitle = language === "ar" ? "ثلاث خطوات بسيطة للحرية المالية" : language === "fr" ? "Trois étapes simples vers la liberté financière" : "Three simple steps to financial freedom";
   const testimonialsTitle = language === "ar" ? "يحبه +50,000 مستخدم" : language === "fr" ? "Aimé par 50,000+ Utilisateurs" : "Loved by 50,000+ Users";
@@ -180,9 +180,9 @@ export default function LandingPage() {
   const pricingTitle = language === "ar" ? "أسعار بسيطة وشفافة" : language === "fr" ? "Tarification Simple et Transparente" : "Simple, Transparent Pricing";
   const pricingSubtitle = language === "ar" ? "ابدأ مجاناً، ارتقي لما تكون جاهز" : language === "fr" ? "Commencez gratuit, passez au niveau supérieur quand vous êtes prêt" : "Start free, upgrade when you're ready";
   const faqTitle = language === "ar" ? "الأسئلة الشائعة" : language === "fr" ? "Questions Fréquentes" : "Frequently Asked Questions";
-  const ctaTitle = language === "ar" ? "جاهز تفرح خالتك؟" : language === "fr" ? "Prêt à Rendre Tante Fière?" : "Ready to Make Auntie Proud?";
-  const ctaSubtitle = language === "ar" ? "انضم لـ +50,000 مستخدم يوفرون فلوس ويفرحون عائلاتهم. ابدأ رحلتك المالية اليوم — خالتك هدى تنتظرك!" : language === "fr" ? "Rejoignez 50,000+ utilisateurs qui économisent et rendent leurs familles fières. Commencez votre parcours financier aujourd'hui!" : "Join 50,000+ users who are saving money and making their families proud. Start your financial journey today — Khaltu Huda is waiting!";
-  const ctaButton = language === "ar" ? "ابدأ مجاناً اليوم" : language === "fr" ? "Commencer Gratuit Aujourd'hui" : "Start Free Today";
+  const ctaTitle = language === "ar" ? "جاهز تتوبخ؟" : language === "fr" ? "Prêt à Vous Faire Gronder?" : "Ready to Get Roasted?";
+  const ctaSubtitle = language === "ar" ? "انضم لآلاف اللي وقفوا صرفهم الزايد بسبب ذنب خالتك هدى. أمك ما تقدر تراقب مصاريفك — بس خالتك تقدر." : language === "fr" ? "Rejoignez des milliers qui ont arrêté de trop dépenser grâce à la culpabilité de Tante. Votre mère ne peut pas surveiller vos dépenses — Tante peut." : "Join thousands who stopped overspending because of Auntie's guilt trips. Your mom can't watch your spending — Auntie Huda can.";
+  const ctaButton = language === "ar" ? "احصل على أول توبيخ" : language === "fr" ? "Recevez Votre Première Critique" : "Get Your First Roast";
   const noCreditCard = language === "ar" ? "لا حاجة لبطاقة ائتمان" : language === "fr" ? "Pas de carte de crédit requise" : "No credit card required";
   const footerText = language === "ar" ? "صنع بـ 💜 في الشرق الأوسط" : language === "fr" ? "Fait avec 💜 au Moyen-Orient" : "Made with 💜 in the Middle East";
   const mostPopular = language === "ar" ? "الأكثر شعبية" : language === "fr" ? "Le Plus Populaire" : "Most Popular";

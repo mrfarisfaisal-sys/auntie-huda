@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Share2, Download, Copy, Check, MessageCircle } from "lucide-react";
+import { X, Share2, Download, Copy, Check, MessageCircle, Instagram } from "lucide-react";
 import { useRef, useState } from "react";
 import { RoastResponse } from "@/types";
+import { useLanguage } from "@/lib/i18n";
 
 interface ShareCardProps {
   isOpen: boolean;
@@ -15,8 +16,55 @@ interface ShareCardProps {
 export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
+  const { language } = useLanguage();
 
-  const shareText = `🔥 Auntie Huda just roasted me!\n\n"${roastData.reply_text}"\n\n💸 ${roastData.merchant} - ${roastData.amount} ${roastData.currency}\n\nGet roasted too 👉 auntiehuda.app`;
+  // Translations
+  const t = {
+    en: {
+      shareTitle: "Share Your Roast",
+      shareText: `🔥 Auntie Huda just ROASTED me!\n\n"${roastData.reply_text}"\n\n💸 ${roastData.merchant} - ${roastData.amount} ${roastData.currency}\n\nGet roasted too 👉 auntiehuda.app`,
+      auntieHuda: "Auntie Huda",
+      subtitle: "Your Financial Roaster",
+      spentOn: "Spent on",
+      madeWith: "Made with 💜 by Auntie Huda",
+      wasteful: "🚨 Wasteful",
+      saver: "✓ Saver",
+      copy: "Copy",
+      copied: "Copied!",
+      saveImage: "Save Image",
+      sharePrompt: "Share this roast with your friends! 😂",
+    },
+    ar: {
+      shareTitle: "شارك التوبيخ",
+      shareText: `🔥 خالتي هدى وبختني!\n\n"${roastData.reply_text}"\n\n💸 ${roastData.merchant} - ${roastData.amount} ${roastData.currency}\n\nاحصل على توبيخك 👈 auntiehuda.app`,
+      auntieHuda: "خالتك هدى",
+      subtitle: "مستشارتك المالية",
+      spentOn: "صرفت على",
+      madeWith: "صنع بـ 💜 من خالتك هدى",
+      wasteful: "🚨 مبذر",
+      saver: "✓ موفر",
+      copy: "نسخ",
+      copied: "تم النسخ!",
+      saveImage: "حفظ صورة",
+      sharePrompt: "شارك الرد مع أصحابك! 😂",
+    },
+    fr: {
+      shareTitle: "Partagez Votre Critique",
+      shareText: `🔥 Tante Huda vient de me GRONDER!\n\n"${roastData.reply_text}"\n\n💸 ${roastData.merchant} - ${roastData.amount} ${roastData.currency}\n\nFaites-vous gronder aussi 👉 auntiehuda.app`,
+      auntieHuda: "Tante Huda",
+      subtitle: "Votre Critique Financière",
+      spentOn: "Dépensé pour",
+      madeWith: "Fait avec 💜 par Tante Huda",
+      wasteful: "🚨 Gaspilleur",
+      saver: "✓ Épargnant",
+      copy: "Copier",
+      copied: "Copié!",
+      saveImage: "Sauvegarder",
+      sharePrompt: "Partagez avec vos amis! 😂",
+    },
+  };
+  const texts = t[language] || t.en;
+  const shareText = texts.shareText;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(shareText);
@@ -73,7 +121,7 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
               <div className="p-4 border-b border-white/10 flex items-center justify-between">
                 <h3 className="font-semibold flex items-center gap-2 text-white">
                   <Share2 size={18} className="text-purple-400" />
-                  شارك الرد
+                  {texts.shareTitle}
                 </h3>
                 <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full">
                   <X size={20} className="text-gray-400" />
@@ -99,8 +147,8 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
                         <img src="/icons/huda-avatar.png" alt="خالتك هدى" className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white">خالتك هدى</h4>
-                        <p className="text-xs text-purple-300">مستشارتك المالية</p>
+                        <h4 className="font-bold text-white">{texts.auntieHuda}</h4>
+                        <p className="text-xs text-purple-300">{texts.subtitle}</p>
                       </div>
                     </div>
 
@@ -114,7 +162,7 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
                     {/* Transaction */}
                     <div className="flex items-center justify-between bg-white/10 rounded-xl p-3">
                       <div>
-                        <p className="text-xs text-gray-400">صرفت على</p>
+                        <p className="text-xs text-gray-400">{texts.spentOn}</p>
                         <p className="font-semibold text-white">{roastData.merchant}</p>
                       </div>
                       <div className="text-right">
@@ -128,14 +176,14 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
                     {/* Footer */}
                     <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
                       <p className="text-xs text-gray-400">
-                        صنع بـ 💜 من خالتك هدى
+                        {texts.madeWith}
                       </p>
                       <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                         roastData.sentiment === "negative" 
                           ? "bg-red-500/20 text-red-300" 
                           : "bg-green-500/20 text-green-300"
                       }`}>
-                        {roastData.sentiment === "negative" ? "🚨 مبذر" : "✓ موفر"}
+                        {roastData.sentiment === "negative" ? texts.wasteful : texts.saver}
                       </div>
                     </div>
                   </div>
@@ -168,21 +216,21 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
                   className="flex items-center justify-center gap-2 bg-white/10 text-white py-3 rounded-xl font-medium"
                 >
                   {copied ? <Check size={18} className="text-green-400" /> : <Copy size={18} />}
-                  {copied ? "تم النسخ!" : "نسخ"}
+                  {copied ? texts.copied : texts.copy}
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleDownload}
-                  className="flex items-center justify-center gap-2 bg-white/10 text-white py-3 rounded-xl font-medium"
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl font-medium"
                 >
                   <Download size={18} />
-                  حفظ صورة
+                  {texts.saveImage}
                 </motion.button>
               </div>
 
               <p className="text-center text-xs text-[#8b7a9e] pb-4">
-                شارك الرد مع أصحابك! 😂
+                {texts.sharePrompt}
               </p>
             </div>
           </motion.div>
