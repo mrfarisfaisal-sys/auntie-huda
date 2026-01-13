@@ -20,3 +20,4 @@ export { QuickStats } from "./QuickStats";
 export { LanguageSwitcher } from "./LanguageSwitcher";
 export { AuthProvider } from "./AuthProvider";
 export { AuthButton, SignInButton } from "./AuthButton";
+export { ConfessionBoard } from "./ConfessionBoard";

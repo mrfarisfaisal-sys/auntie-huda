@@ -17,6 +17,7 @@ import {
   DesktopSidebar,
   CosmicBackground,
   QuickStats,
+  ConfessionBoard,
 } from "@/components";
 import { useDailySpending, useChatHistory } from "@/hooks/useLocalStorage";
 import { RoastResponse } from "@/types";
@@ -53,6 +54,7 @@ export default function Home() {
   const [showShare, setShowShare] = useState(false);
   const [shareRoast, setShareRoast] = useState<RoastResponse | null>(null);
   const [showReward, setShowReward] = useState(false);
+  const [showConfessions, setShowConfessions] = useState(false);
   const [rewardData, setRewardData] = useState<{ type: "streak" | "achievement" | "saving" | "challenge"; title: string; description: string; points: number }>({ type: "streak", title: "", description: "", points: 0 });
   const [userSettings, setUserSettings] = useState<UserSettings>({
     name: "",
@@ -314,6 +316,7 @@ export default function Home() {
               onResetSpending={resetSpending}
               onOpenInsights={() => setShowInsights(true)}
               onOpenAchievements={() => setShowAchievements(true)}
+              onOpenConfessions={() => setShowConfessions(true)}
             />
 
             <StreakBanner streak={userSettings.streak} show={messages.length <= 2} />
@@ -397,6 +400,11 @@ export default function Home() {
         title={rewardData.title}
         description={rewardData.description}
         points={rewardData.points}
+      />
+
+      <ConfessionBoard
+        isOpen={showConfessions}
+        onClose={() => setShowConfessions(false)}
       />
     </>
   );

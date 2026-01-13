@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreVertical, Trash2, BarChart3, Trophy, Flame, RotateCcw } from "lucide-react";
+import { MoreVertical, Trash2, BarChart3, Trophy, Flame, RotateCcw, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DailySpending } from "@/types";
@@ -13,6 +13,7 @@ interface ChatHeaderProps {
   onResetSpending: () => void;
   onOpenInsights: () => void;
   onOpenAchievements: () => void;
+  onOpenConfessions?: () => void;
 }
 
 export function ChatHeader({ 
@@ -23,6 +24,7 @@ export function ChatHeader({
   onResetSpending,
   onOpenInsights,
   onOpenAchievements,
+  onOpenConfessions,
 }: ChatHeaderProps) {
   const [showMenu, setShowMenu] = useState(false);
   const percentUsed = Math.min((spending.total / dailyLimit) * 100, 100);
@@ -64,6 +66,17 @@ export function ChatHeader({
               <Flame size={14} className="text-orange-400" aria-hidden="true" />
               <span className="text-xs font-semibold text-orange-300">{streak}</span>
             </div>
+          )}
+          
+          {onOpenConfessions && (
+            <button
+              onClick={onOpenConfessions}
+              className="btn-ghost p-2.5 rounded-lg relative"
+              aria-label="Confession Board"
+            >
+              <MessageSquare size={20} className="text-[#c4b5d4]" />
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-pink-500 rounded-full" />
+            </button>
           )}
           
           <button
