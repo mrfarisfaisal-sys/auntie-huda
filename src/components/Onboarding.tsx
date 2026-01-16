@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sparkles, TrendingDown, Trophy, Heart } from "lucide-react";
-import { useLanguage } from "@/lib/i18n";
+import { useLanguage, Language } from "@/lib/i18n";
 
 interface OnboardingProps {
   onComplete: (name: string, currency: string, dailyLimit: number, savingsGoal: { name: string; amount: number }) => void;
@@ -145,8 +145,14 @@ const TEXTS = {
   },
 };
 
+const LANGUAGES = [
+  { code: "en" as Language, name: "English", flag: "🇬🇧" },
+  { code: "ar" as Language, name: "العربية", flag: "🇸🇦" },
+  { code: "fr" as Language, name: "Français", flag: "🇫🇷" },
+];
+
 export function Onboarding({ onComplete }: OnboardingProps) {
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const t = TEXTS[language] || TEXTS.en;
   const goals = SAVINGS_GOALS[language] || SAVINGS_GOALS.en;
   const otherGoalName = t.otherGoal;
@@ -165,6 +171,30 @@ export function Onboarding({ onComplete }: OnboardingProps) {
 
   const steps = [
     {
+      title: "Choose Your Language",
+      subtitle: "اختر لغتك • Choisissez votre langue",
+      content: (
+        <div className="flex flex-col gap-3">
+          {LANGUAGES.map((lang) => (
+            <motion.button
+              key={lang.code}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setLanguage(lang.code)}
+              className={`p-4 rounded-2xl border-2 transition-all flex items-center gap-4 ${
+                language === lang.code
+                  ? "border-purple-500 bg-purple-500/20"
+                  : "border-[#3d3d5a] bg-[#2d2d4a] hover:border-purple-500/50"
+              }`}
+            >
+              <span className="text-3xl">{lang.flag}</span>
+              <span className="font-semibold text-lg">{lang.name}</span>
+            </motion.button>
+          ))}
+        </div>
+      ),
+    },
+    {
       title: t.welcome,
       subtitle: t.welcomeSub,
       content: (
@@ -174,10 +204,10 @@ export function Onboarding({ onComplete }: OnboardingProps) {
           transition={{ type: "spring", delay: 0.3 }}
           className="text-center"
         >
-          <div className="w-32 h-32 mx-auto bg-gradient-to-br from-purple-500 to-purple-700 rounded-full overflow-hidden shadow-2xl mb-6">
+          <div className="w-28 h-28 mx-auto bg-gradient-to-br from-purple-500 to-purple-700 rounded-full overflow-hidden shadow-2xl mb-4">
             <img src="/icons/huda-avatar.png" alt="Auntie Huda" className="w-full h-full object-cover" />
           </div>
-          <p className="text-gray-300 text-lg leading-relaxed">
+          <p className="text-gray-300 text-base leading-relaxed">
             {t.welcomeText}
             <span className="text-red-400">{t.welcomeHighlight}</span> 😤
           </p>
@@ -207,21 +237,21 @@ export function Onboarding({ onComplete }: OnboardingProps) {
       title: t.currencyTitle,
       subtitle: t.currencySub,
       content: (
-        <div className="grid grid-cols-2 gap-3 max-h-[280px] overflow-y-auto scrollbar-hide">
-          {CURRENCIES.map((c) => (
+        <div className="grid grid-cols-2 gap-2">
+          {CURRENCIES.slice(0, 4).map((c) => (
             <motion.button
               key={c.code}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setCurrency(c.code)}
-              className={`p-4 rounded-2xl border-2 transition-all ${
+              className={`p-3 rounded-xl border-2 transition-all ${
                 currency === c.code
                   ? "border-purple-500 bg-purple-500/20"
                   : "border-[#3d3d5a] bg-[#2d2d4a] hover:border-purple-500/50"
               }`}
             >
-              <span className="text-2xl mb-2 block">{c.flag}</span>
-              <span className="font-semibold">{c.code}</span>
+              <span className="text-xl mb-1 block">{c.flag}</span>
+              <span className="font-semibold text-sm">{c.code}</span>
               <span className="text-xs text-gray-400 block">{getCurrencyName(c)}</span>
             </motion.button>
           ))}
@@ -261,9 +291,9 @@ export function Onboarding({ onComplete }: OnboardingProps) {
       title: t.goalTitle,
       subtitle: t.goalSub,
       content: (
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3 max-h-[200px] overflow-y-auto scrollbar-hide">
-            {goals.map((goal) => (
+        <div className="space-y-3">
+          <div className="grid grid-cols-4 gap-2">
+            {goals.slice(0, 4).map((goal) => (
               <motion.button
                 key={goal.name}
                 whileHover={{ scale: 1.02 }}
@@ -272,14 +302,14 @@ export function Onboarding({ onComplete }: OnboardingProps) {
                   setSelectedGoal(goal);
                   setGoalAmount(goal.defaultAmount);
                 }}
-                className={`p-3 rounded-2xl border-2 transition-all text-left ${
+                className={`p-2 rounded-xl border-2 transition-all text-center ${
                   selectedGoal.name === goal.name
                     ? "border-purple-500 bg-purple-500/20"
                     : "border-[#3d3d5a] bg-[#2d2d4a] hover:border-purple-500/50"
                 }`}
               >
-                <span className="text-2xl mb-1 block">{goal.emoji}</span>
-                <span className="font-medium text-sm">{goal.name}</span>
+                <span className="text-xl block">{goal.emoji}</span>
+                <span className="font-medium text-xs">{goal.name.split(" ")[0]}</span>
               </motion.button>
             ))}
           </div>
@@ -292,13 +322,13 @@ export function Onboarding({ onComplete }: OnboardingProps) {
               className="w-full bg-[#2d2d4a] text-white placeholder-gray-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           )}
-          <div className="bg-[#2d2d4a] rounded-xl p-4">
+          <div className="bg-[#2d2d4a] rounded-xl p-3">
             <label className="text-sm text-gray-400 block mb-2">{t.goalAmount} ({currency})</label>
             <input
               type="number"
               value={goalAmount}
               onChange={(e) => setGoalAmount(Number(e.target.value))}
-              className="w-full bg-[#1a1a2e] text-white text-2xl font-bold rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 text-center"
+              className="w-full bg-[#1a1a2e] text-white text-xl font-bold rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 text-center"
             />
           </div>
         </div>
@@ -333,11 +363,11 @@ export function Onboarding({ onComplete }: OnboardingProps) {
     },
   ];
 
-  const canProceed = step === 1 ? name.trim().length > 0 : true;
+  const canProceed = step === 2 ? name.trim().length > 0 : true;
 
   return (
-    <div className="fixed inset-0 bg-[#1a1a2e] z-50 flex flex-col overflow-hidden">
-      <div className="flex-1 flex flex-col justify-center px-6 py-6 max-w-md mx-auto w-full overflow-y-auto scrollbar-hide">
+    <div className="fixed inset-0 bg-[#1a1a2e] z-50 flex flex-col h-dvh overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center px-6 py-4 max-w-md mx-auto w-full min-h-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
@@ -358,13 +388,13 @@ export function Onboarding({ onComplete }: OnboardingProps) {
               <p className="text-gray-400">{steps[step].subtitle}</p>
             </div>
 
-            <div className="py-6">{steps[step].content}</div>
+            <div className="py-4">{steps[step].content}</div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      <div className="px-6 pb-8 max-w-md mx-auto w-full">
-        <div className="flex gap-2 mb-6 justify-center">
+      <div className="px-6 pb-6 max-w-md mx-auto w-full flex-shrink-0">
+        <div className="flex gap-2 mb-4 justify-center">
           {steps.map((_, i) => (
             <div
               key={i}
