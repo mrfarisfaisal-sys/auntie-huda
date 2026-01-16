@@ -7,6 +7,7 @@ Your favorite Arab auntie who roasts your spending habits with love! A personali
 
 ## المميزات | Features
 
+- **دعم متعدد اللغات** - English, العربية, Français - اختر لغتك عند بدء التطبيق
 - **واجهة محادثة عربية** - تصميم RTL كامل مع خط Noto Sans Arabic
 - **تتبع المصاريف الذكي** - اكتب "ستاربكس 25 ريال" أو صور رسالة البنك
 - **GPT-4o Vision** - يقرأ صور الرسائل البنكية تلقائياً
@@ -15,6 +16,7 @@ Your favorite Arab auntie who roasts your spending habits with love! A personali
 - **إنجازات ومستويات** - نظام إنجازات لتحفيزك
 - **الستريك** - تتبع أيامك المتتالية تحت الميزانية
 - **مشاركة الردود** - شارك ردود خالتك مع أصحابك
+- **Confession Board** - شارك اعترافاتك المالية مع المجتمع
 - **PWA** - ثبته على جوالك كتطبيق
 
 ## Getting Started
@@ -45,9 +47,11 @@ Open [http://localhost:3000](http://localhost:3000) on your phone or browser.
 
 ## Usage
 
-1. **Text Input**: Type your transaction like `Starbucks 25 SAR` or `Sephora 200 AED`
-2. **Image Upload**: Click the image icon to upload a screenshot of your bank SMS
-3. **Get Roasted**: Auntie Huda will analyze your spending and give you her honest (and dramatic) opinion!
+1. **Choose Language**: Select English, Arabic, or French during onboarding
+2. **Text Input**: Type your transaction like `Starbucks 25 SAR` or `Sephora 200 AED`
+3. **Image Upload**: Click the image icon to upload a screenshot of your bank SMS
+4. **Get Roasted**: Auntie Huda will analyze your spending and give you her honest (and dramatic) opinion!
+5. **Quick Templates**: Use the quick action buttons for common expenses (Coffee, Delivery, Shopping, etc.)
 
 ## Tech Stack
 

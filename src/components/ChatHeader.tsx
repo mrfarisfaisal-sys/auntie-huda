@@ -4,6 +4,31 @@ import { MoreVertical, Trash2, BarChart3, Trophy, Flame, RotateCcw, MessageSquar
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DailySpending } from "@/types";
+import { useLanguage } from "@/lib/i18n";
+
+const TEXTS = {
+  en: {
+    title: "Auntie Huda",
+    online: "Online now",
+    clearChat: "Clear chat",
+    resetDay: "Reset today",
+    budgetToday: "Your budget today",
+  },
+  ar: {
+    title: "خالتي هدى",
+    online: "متصلة الآن",
+    clearChat: "مسح المحادثة",
+    resetDay: "إعادة تعيين اليوم",
+    budgetToday: "ميزانيتك اليوم",
+  },
+  fr: {
+    title: "Tante Huda",
+    online: "En ligne",
+    clearChat: "Effacer le chat",
+    resetDay: "Réinitialiser",
+    budgetToday: "Votre budget",
+  },
+};
 
 interface ChatHeaderProps {
   spending: DailySpending;
@@ -26,6 +51,8 @@ export function ChatHeader({
   onOpenAchievements,
   onOpenConfessions,
 }: ChatHeaderProps) {
+  const { language } = useLanguage();
+  const t = TEXTS[language] || TEXTS.en;
   const [showMenu, setShowMenu] = useState(false);
   const percentUsed = Math.min((spending.total / dailyLimit) * 100, 100);
   const isOverBudget = spending.total > dailyLimit;
@@ -48,9 +75,9 @@ export function ChatHeader({
             <img src="/icons/huda-avatar.png" alt="خالتك هدى" className="w-full h-full object-cover" />
           </div>
           <div>
-            <h1 className="font-semibold text-white text-base">خالتي هدى</h1>
+            <h1 className="font-semibold text-white text-base">{t.title}</h1>
             <p className="text-xs text-[#c4b5d4] flex items-center gap-1.5">
-              متصلة الآن
+              {t.online}
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full" aria-hidden="true" />
             </p>
           </div>
@@ -127,7 +154,7 @@ export function ChatHeader({
                       role="menuitem"
                     >
                       <Trash2 size={16} />
-                      مسح المحادثة
+                      {t.clearChat}
                     </button>
                     <button
                       onClick={() => { onResetSpending(); setShowMenu(false); }}
@@ -135,7 +162,7 @@ export function ChatHeader({
                       role="menuitem"
                     >
                       <RotateCcw size={16} />
-                      إعادة تعيين اليوم
+                      {t.resetDay}
                     </button>
                   </motion.div>
                 </>
@@ -155,7 +182,7 @@ export function ChatHeader({
         aria-label="Daily spending progress"
       >
         <div className="flex justify-between items-center mb-2">
-          <span className="text-xs text-[#c4b5d4] font-medium">ميزانيتك اليوم</span>
+          <span className="text-xs text-[#c4b5d4] font-medium">{t.budgetToday}</span>
           <span className={`font-bold text-sm ${
             isOverBudget ? "text-red-400" : isWarning ? "text-amber-400" : "text-white"
           }`}>

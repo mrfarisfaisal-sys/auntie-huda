@@ -2,6 +2,46 @@
 
 import { TrendingUp, TrendingDown, Target, Flame, Wallet } from "lucide-react";
 import { DailySpending } from "@/types";
+import { useLanguage } from "@/lib/i18n";
+
+const TEXTS = {
+  en: {
+    quickLook: "Quick Stats",
+    statsToday: "Your stats today",
+    spentToday: "Spent today",
+    exceededBy: "Exceeded by",
+    remaining: "Remaining",
+    remainingLabel: "Remaining",
+    streakDays: "Day streak",
+    days: "days",
+    totalSaved: "Total saved",
+    proudOfYou: "💜 Auntie is proud of you",
+  },
+  ar: {
+    quickLook: "نظرة سريعة",
+    statsToday: "إحصائياتك اليوم",
+    spentToday: "صرفت اليوم",
+    exceededBy: "تجاوزت بـ",
+    remaining: "باقي",
+    remainingLabel: "المتبقي",
+    streakDays: "أيام متتالية",
+    days: "يوم",
+    totalSaved: "إجمالي التوفير",
+    proudOfYou: "💜 خالتك فخورة فيك",
+  },
+  fr: {
+    quickLook: "Aperçu Rapide",
+    statsToday: "Vos stats du jour",
+    spentToday: "Dépensé aujourd'hui",
+    exceededBy: "Dépassé de",
+    remaining: "Restant",
+    remainingLabel: "Restant",
+    streakDays: "Jours consécutifs",
+    days: "jours",
+    totalSaved: "Total économisé",
+    proudOfYou: "💜 Tante est fière de vous",
+  },
+};
 
 interface QuickStatsProps {
   spending: DailySpending;
@@ -18,6 +58,8 @@ export function QuickStats({
   currency = "QAR", 
   dailyLimit = 300 
 }: QuickStatsProps) {
+  const { language } = useLanguage();
+  const t = TEXTS[language] || TEXTS.en;
   const total = spending?.total ?? 0;
   const remaining = dailyLimit - total;
   const isOverBudget = remaining < 0;
@@ -27,8 +69,8 @@ export function QuickStats({
     <div className="flex flex-col h-full p-4 overflow-y-auto scrollbar-hide">
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-white">نظرة سريعة</h2>
-        <p className="text-sm text-[#8b7a9e]">إحصائياتك اليوم</p>
+        <h2 className="text-lg font-semibold text-white">{t.quickLook}</h2>
+        <p className="text-sm text-[#8b7a9e]">{t.statsToday}</p>
       </div>
 
       {/* Stats Grid */}
@@ -40,7 +82,7 @@ export function QuickStats({
               <Wallet size={20} className="text-purple-400" />
             </div>
             <div>
-              <p className="text-xs text-[#8b7a9e]">صرفت اليوم</p>
+              <p className="text-xs text-[#8b7a9e]">{t.spentToday}</p>
               <p className="text-xl font-bold text-white">
                 {total.toFixed(0)} <span className="text-sm text-[#8b7a9e]">{currency}</span>
               </p>
@@ -55,7 +97,7 @@ export function QuickStats({
             />
           </div>
           <p className="text-xs text-[#8b7a9e] mt-2">
-            {isOverBudget ? `تجاوزت بـ ${Math.abs(remaining).toFixed(0)} ${currency}` : `باقي ${remaining.toFixed(0)} ${currency}`}
+            {isOverBudget ? `${t.exceededBy} ${Math.abs(remaining).toFixed(0)} ${currency}` : `${t.remaining} ${remaining.toFixed(0)} ${currency}`}
           </p>
         </div>
 
@@ -72,7 +114,7 @@ export function QuickStats({
               )}
             </div>
             <div>
-              <p className="text-xs text-[#8b7a9e]">المتبقي</p>
+              <p className="text-xs text-[#8b7a9e]">{t.remainingLabel}</p>
               <p className={`text-xl font-bold ${isOverBudget ? "text-red-400" : "text-green-400"}`}>
                 {remaining.toFixed(0)} <span className="text-sm text-[#8b7a9e]">{currency}</span>
               </p>
@@ -87,9 +129,9 @@ export function QuickStats({
               <Flame size={20} className="text-orange-400" />
             </div>
             <div>
-              <p className="text-xs text-[#8b7a9e]">أيام متتالية</p>
+              <p className="text-xs text-[#8b7a9e]">{t.streakDays}</p>
               <p className="text-xl font-bold text-orange-400">
-                {streak} <span className="text-sm text-[#8b7a9e]">يوم</span>
+                {streak} <span className="text-sm text-[#8b7a9e]">{t.days}</span>
               </p>
             </div>
           </div>
@@ -102,7 +144,7 @@ export function QuickStats({
               <Target size={20} className="text-emerald-400" />
             </div>
             <div>
-              <p className="text-xs text-[#8b7a9e]">إجمالي التوفير</p>
+              <p className="text-xs text-[#8b7a9e]">{t.totalSaved}</p>
               <p className="text-xl font-bold text-emerald-400">
                 {(totalSaved ?? 0).toFixed(0)} <span className="text-sm text-[#8b7a9e]">{currency}</span>
               </p>
@@ -114,7 +156,7 @@ export function QuickStats({
       {/* Footer tip */}
       <div className="mt-auto pt-4 border-t border-purple-500/10">
         <p className="text-xs text-[#8b7a9e] text-center">
-          💜 خالتك فخورة فيك
+          {t.proudOfYou}
         </p>
       </div>
     </div>
