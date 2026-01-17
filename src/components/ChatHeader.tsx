@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreVertical, Trash2, BarChart3, Trophy, Flame, RotateCcw, MessageSquare } from "lucide-react";
+import { MoreVertical, Trash2, BarChart3, Trophy, Flame, RotateCcw, MessageSquare, Users, Gift } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DailySpending } from "@/types";
@@ -39,6 +39,9 @@ interface ChatHeaderProps {
   onOpenInsights: () => void;
   onOpenAchievements: () => void;
   onOpenConfessions?: () => void;
+  onOpenReferral?: () => void;
+  onOpenSquad?: () => void;
+  onOpenBadges?: () => void;
 }
 
 export function ChatHeader({ 
@@ -50,6 +53,9 @@ export function ChatHeader({
   onOpenInsights,
   onOpenAchievements,
   onOpenConfessions,
+  onOpenReferral,
+  onOpenSquad,
+  onOpenBadges,
 }: ChatHeaderProps) {
   const { language } = useLanguage();
   const t = TEXTS[language] || TEXTS.en;
@@ -164,6 +170,27 @@ export function ChatHeader({
                       <RotateCcw size={16} />
                       {t.resetDay}
                     </button>
+                    <div className="border-t border-purple-500/10" />
+                    {onOpenReferral && (
+                      <button
+                        onClick={() => { onOpenReferral(); setShowMenu(false); }}
+                        className="w-full px-4 py-3 text-left text-sm hover:bg-purple-500/10 flex items-center gap-3 text-[#c4b5d4] transition-colors"
+                        role="menuitem"
+                      >
+                        <Gift size={16} className="text-pink-400" />
+                        {language === "ar" ? "ادعُ أصدقاء" : language === "fr" ? "Inviter des Amis" : "Invite Friends"}
+                      </button>
+                    )}
+                    {onOpenSquad && (
+                      <button
+                        onClick={() => { onOpenSquad(); setShowMenu(false); }}
+                        className="w-full px-4 py-3 text-left text-sm hover:bg-purple-500/10 flex items-center gap-3 text-[#c4b5d4] transition-colors"
+                        role="menuitem"
+                      >
+                        <Users size={16} className="text-blue-400" />
+                        {language === "ar" ? "فريق العائلة" : language === "fr" ? "Équipe Familiale" : "Family Squad"}
+                      </button>
+                    )}
                   </motion.div>
                 </>
               )}

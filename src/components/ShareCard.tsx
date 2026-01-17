@@ -1,10 +1,12 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Share2, Download, Copy, Check, MessageCircle, Instagram } from "lucide-react";
+import { X, Share2, Download, Copy, Check, MessageCircle, Instagram, QrCode, Swords } from "lucide-react";
 import { useRef, useState } from "react";
 import { RoastResponse } from "@/types";
 import { useLanguage } from "@/lib/i18n";
+
+const APP_URL = "https://auntie-huda.vercel.app";
 
 interface ShareCardProps {
   isOpen: boolean;
@@ -16,7 +18,12 @@ interface ShareCardProps {
 export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
+  const [showChallenge, setShowChallenge] = useState(false);
   const { language } = useLanguage();
+  
+  // Generate referral code
+  const referralCode = `HUDA-${userName?.toUpperCase().slice(0,4) || 'USER'}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+  const referralLink = `${APP_URL}?ref=${referralCode}`;
 
   // Translations
   const t = {
@@ -33,6 +40,9 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
       copied: "Copied!",
       saveImage: "Save Image",
       sharePrompt: "Share this roast with your friends! 😂",
+      challenge: "Challenge a Friend",
+      challengeText: "Think you can handle Auntie Huda?",
+      qrScan: "Scan to get roasted",
     },
     ar: {
       shareTitle: "شارك التوبيخ",
@@ -47,6 +57,9 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
       copied: "تم النسخ!",
       saveImage: "حفظ صورة",
       sharePrompt: "شارك الرد مع أصحابك! 😂",
+      challenge: "تحدى صديق",
+      challengeText: "هل تقدر تتحمل خالتك هدى؟",
+      qrScan: "امسح للتوبيخ",
     },
     fr: {
       shareTitle: "Partagez Votre Critique",
@@ -61,6 +74,9 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
       copied: "Copié!",
       saveImage: "Sauvegarder",
       sharePrompt: "Partagez avec vos amis! 😂",
+      challenge: "Défier un ami",
+      challengeText: "Pouvez-vous supporter Tante Huda?",
+      qrScan: "Scannez pour être grondé",
     },
   };
   const texts = t[language] || t.en;
@@ -72,8 +88,28 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Viral share messages
+  const getViralWhatsAppMessage = () => {
+    const messages = {
+      en: `😂😂😂 You HAVE to try this app\nAuntie Huda just exposed all my spending sins\n\nShe told me: "${roastData.reply_text.slice(0, 100)}..."\n\nThink you can survive her? 👇\n${referralLink}`,
+      ar: `😂😂😂 لازم تجرب هالتطبيق\nخالتي هدى طلعتلي عيوبي المالية كلها\n\nشوف وش قالتلي: "${roastData.reply_text.slice(0, 100)}..."\n\nجرب إذا تقدر تتحملها 👇\n${referralLink}`,
+      fr: `😂😂😂 Tu DOIS essayer cette app\nTante Huda vient d'exposer tous mes péchés financiers\n\nElle m'a dit: "${roastData.reply_text.slice(0, 100)}..."\n\nPenses-tu pouvoir la supporter? 👇\n${referralLink}`,
+    };
+    return messages[language] || messages.en;
+  };
+
+  const getChallengeMessage = () => {
+    const messages = {
+      en: `⚔️ I challenge you to a SAVINGS BATTLE!\n\nLet's see who Auntie Huda roasts more this week 😈\nLoser buys coffee!\n\nJoin here: ${referralLink}`,
+      ar: `⚔️ أتحداك في معركة التوفير!\n\nخلنا نشوف مين خالتي هدى تذبحه أكثر هالأسبوع 😈\nالخسران يشتري القهوة!\n\nسجل من هنا: ${referralLink}`,
+      fr: `⚔️ Je te défie dans une BATAILLE D'ÉPARGNE!\n\nVoyons qui Tante Huda gronde le plus cette semaine 😈\nLe perdant paie le café!\n\nRejoins ici: ${referralLink}`,
+    };
+    return messages[language] || messages.en;
+  };
+
   const handleWhatsApp = () => {
-    const url = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+    const message = showChallenge ? getChallengeMessage() : getViralWhatsAppMessage();
+    const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
 
@@ -173,11 +209,17 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
                       </div>
                     </div>
 
-                    {/* Footer */}
+                    {/* Footer with QR Code hint */}
                     <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                      <p className="text-xs text-gray-400">
-                        {texts.madeWith}
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <div className="w-12 h-12 bg-white rounded-lg p-1 flex items-center justify-center">
+                          <QrCode size={32} className="text-purple-900" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] text-gray-400">{texts.qrScan}</p>
+                          <p className="text-[8px] text-purple-400 font-mono">{referralCode}</p>
+                        </div>
+                      </div>
                       <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                         roastData.sentiment === "negative" 
                           ? "bg-red-500/20 text-red-300" 
@@ -186,8 +228,28 @@ export function ShareCard({ isOpen, onClose, roastData, userName }: ShareCardPro
                         {roastData.sentiment === "negative" ? texts.wasteful : texts.saver}
                       </div>
                     </div>
+
+                    {/* Challenge CTA */}
+                    <div className="mt-3 text-center">
+                      <p className="text-xs text-purple-300 font-medium">
+                        {texts.challengeText}
+                      </p>
+                    </div>
                   </div>
                 </div>
+
+                {/* Challenge Toggle */}
+                <button
+                  onClick={() => setShowChallenge(!showChallenge)}
+                  className={`mt-3 w-full py-2 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-all ${
+                    showChallenge 
+                      ? "bg-gradient-to-r from-orange-500 to-red-500 text-white" 
+                      : "bg-white/5 text-purple-300 border border-purple-500/20"
+                  }`}
+                >
+                  <Swords size={16} />
+                  {texts.challenge}
+                </button>
               </div>
 
               {/* Share Buttons */}

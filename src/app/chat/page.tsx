@@ -18,6 +18,9 @@ import {
   CosmicBackground,
   QuickStats,
   ConfessionBoard,
+  ReferralSystem,
+  SquadSystem,
+  BadgeSystem,
 } from "@/components";
 import { useDailySpending, useChatHistory } from "@/hooks/useLocalStorage";
 import { RoastResponse } from "@/types";
@@ -55,6 +58,10 @@ export default function Home() {
   const [shareRoast, setShareRoast] = useState<RoastResponse | null>(null);
   const [showReward, setShowReward] = useState(false);
   const [showConfessions, setShowConfessions] = useState(false);
+  const [showReferral, setShowReferral] = useState(false);
+  const [showSquad, setShowSquad] = useState(false);
+  const [showBadges, setShowBadges] = useState(false);
+  const [totalRoasts, setTotalRoasts] = useState(0);
   const [rewardData, setRewardData] = useState<{ type: "streak" | "achievement" | "saving" | "challenge"; title: string; description: string; points: number }>({ type: "streak", title: "", description: "", points: 0 });
   const [userSettings, setUserSettings] = useState<UserSettings>({
     name: "",
@@ -317,6 +324,9 @@ export default function Home() {
               onOpenInsights={() => setShowInsights(true)}
               onOpenAchievements={() => setShowAchievements(true)}
               onOpenConfessions={() => setShowConfessions(true)}
+              onOpenReferral={() => setShowReferral(true)}
+              onOpenSquad={() => setShowSquad(true)}
+              onOpenBadges={() => setShowBadges(true)}
             />
 
             <StreakBanner streak={userSettings.streak} show={messages.length <= 2} />
@@ -405,6 +415,30 @@ export default function Home() {
       <ConfessionBoard
         isOpen={showConfessions}
         onClose={() => setShowConfessions(false)}
+      />
+
+      <ReferralSystem
+        isOpen={showReferral}
+        onClose={() => setShowReferral(false)}
+        userName={userSettings.name}
+      />
+
+      <SquadSystem
+        isOpen={showSquad}
+        onClose={() => setShowSquad(false)}
+        userName={userSettings.name}
+        userSpending={spending.total}
+        userSavings={userSettings.totalSaved}
+        userStreak={userSettings.streak}
+      />
+
+      <BadgeSystem
+        isOpen={showBadges}
+        onClose={() => setShowBadges(false)}
+        streak={userSettings.streak}
+        totalSaved={userSettings.totalSaved}
+        totalRoasts={totalRoasts}
+        referralCount={0}
       />
     </>
   );

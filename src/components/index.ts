@@ -21,3 +21,6 @@ export { LanguageSwitcher } from "./LanguageSwitcher";
 export { AuthProvider } from "./AuthProvider";
 export { AuthButton, SignInButton } from "./AuthButton";
 export { ConfessionBoard } from "./ConfessionBoard";
+export { ReferralSystem } from "./ReferralSystem";
+export { SquadSystem } from "./SquadSystem";
+export { BadgeSystem } from "./BadgeSystem";
