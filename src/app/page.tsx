@@ -210,7 +210,9 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">👩‍🦳</span>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center overflow-hidden shadow-lg shadow-green-500/30 huda-float">
+                <img src="/icons/Adobe Express - file(1).png" alt="Auntie Huda" className="w-full h-full object-cover" />
+              </div>
               <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 {title}
               </span>
@@ -345,8 +347,8 @@ export default function LandingPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur-xl opacity-30" />
             <div className="relative bg-[#1a1a2e] rounded-3xl border border-white/10 p-6 shadow-2xl">
               <div className="flex items-start gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl flex-shrink-0">
-                  👩‍🦳
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-lg shadow-green-500/30 huda-float">
+                  <img src="/icons/Adobe Express - file(1).png" alt="Auntie Huda" className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
@@ -661,7 +663,9 @@ export default function LandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="text-6xl mb-6">👩‍🦳</div>
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center overflow-hidden shadow-xl shadow-green-500/40 huda-float">
+              <img src="/icons/Adobe Express - file(1).png" alt="Auntie Huda" className="w-full h-full object-cover" />
+            </div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               {ctaTitle}
             </h2>
@@ -685,7 +689,9 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">👩‍🦳</span>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center overflow-hidden shadow-md shadow-green-500/30">
+                <img src="/icons/Adobe Express - file(1).png" alt="Auntie Huda" className="w-full h-full object-cover" />
+              </div>
               <span className="font-bold text-xl">{title}</span>
             </div>
             <div className="flex items-center gap-6 text-gray-400 text-sm">

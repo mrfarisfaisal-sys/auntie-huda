@@ -241,6 +241,35 @@ button:focus-visible {
   animation: fadeIn 0.2s ease-out;
 }
 
+/* Huda Avatar Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.huda-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.huda-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+  overflow: hidden;
+}
+
+.huda-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ===========================================
    UTILITIES
    =========================================== */
