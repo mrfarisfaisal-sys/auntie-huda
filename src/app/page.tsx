@@ -188,6 +188,13 @@ export default function LandingPage() {
   const mostPopular = language === "ar" ? "الأكثر شعبية" : language === "fr" ? "Le Plus Populaire" : "Most Popular";
   const savedText = language === "ar" ? "وفّر" : language === "fr" ? "Économisé" : "Saved";
   const watchDemo = language === "ar" ? "شاهد العرض" : language === "fr" ? "Voir la Démo" : "Watch Demo";
+  const badgeText = language === "ar" ? "🏆 تطبيق المالية #1 في الشرق الأوسط" : language === "fr" ? "🏆 #1 App Finance au Moyen-Orient" : "🏆 #1 Finance App in MENA Region";
+  const hudaName = language === "ar" ? "خالتك هدى" : language === "fr" ? "Tante Huda" : "Khaltu Huda";
+  const demoRoast = language === "ar" 
+    ? "واللهي؟! 45 ريال على ستاربكس مرة ثانية؟ ☕️ حبيبي، قهوتي بالبيت مجانية! تعرف ابن عمك أحمد؟ صار دكتور لأنه وفر فلوس القهوة! بطل تحاول تجيبلي ضغط! 💔"
+    : language === "fr"
+    ? "Walahi?! 45 SAR sur Starbucks ENCORE? ☕️ Mon café maison est GRATUIT! Tu connais Cousin Ahmed? Il est docteur maintenant parce qu'il a économisé son argent café! Arrête de me donner une crise cardiaque! 💔"
+    : "Walahi?! 45 SAR on Starbucks AGAIN? ☕️ Habibi, my home coffee is FREE. You know Cousin Ahmed? He's a doctor now because he saved his coffee money! Stop trying to give me a heart attack! 💔";
 
   // How it works steps
   const howItWorksSteps = language === "ar" 
@@ -276,7 +283,7 @@ export default function LandingPage() {
           >
             <Sparkles size={16} className="text-yellow-400" />
             <span className="text-sm text-gray-300">
-              #1 Finance App in MENA Region
+              {badgeText}
             </span>
           </motion.div>
 
@@ -343,7 +350,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-semibold">Khaltu Huda</span>
+                    <span className="font-semibold">{hudaName}</span>
                     <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">AI</span>
                   </div>
                   <motion.div
@@ -353,9 +360,7 @@ export default function LandingPage() {
                     className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-2xl rounded-tl-none p-4 text-left"
                   >
                     <p className="text-gray-200 text-sm leading-relaxed">
-                      Walahi?! 45 SAR on Starbucks AGAIN? ☕️ Habibi, my home coffee is FREE. 
-                      You know Cousin Ahmed? He's a doctor now because he saved his coffee money! 
-                      <span className="text-purple-300"> Stop trying to give me a heart attack! 💔</span>
+                      {demoRoast}
                     </p>
                   </motion.div>
                 </div>

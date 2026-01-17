@@ -48,7 +48,7 @@ interface UserSettings {
 
 export default function Home() {
   const { spending, addTransaction, resetSpending } = useDailySpending();
-  const { messages, addMessage, clearHistory } = useChatHistory();
+  const { messages, addMessage, clearHistory, resetAll } = useChatHistory();
   const { language } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -327,6 +327,7 @@ export default function Home() {
               onOpenReferral={() => setShowReferral(true)}
               onOpenSquad={() => setShowSquad(true)}
               onOpenBadges={() => setShowBadges(true)}
+              onResetAll={resetAll}
             />
 
             <StreakBanner streak={userSettings.streak} show={messages.length <= 2} />

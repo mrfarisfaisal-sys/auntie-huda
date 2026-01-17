@@ -3,6 +3,12 @@
 import { useState, useEffect } from "react";
 import { DailySpending, ChatMessage } from "@/types";
 
+const WELCOME_MESSAGES = {
+  en: "Hey there, habibi! 👋 I'm Auntie Huda. Send me your expenses and I'll tell you the truth. Yallah, show me what you bought today! 💜",
+  ar: "أهلاً يا حبيبي! 👋 أنا خالتك هدى. أرسلي مصاريفك وبقولك الحقيقة. يلا، وريني شو اشتريت اليوم! 💜",
+  fr: "Salut mon chéri! 👋 Je suis Tante Huda. Envoie-moi tes dépenses et je te dirai la vérité. Allez, montre-moi ce que tu as acheté! 💜",
+};
+
 const STORAGE_KEYS = {
   DAILY_SPENDING: "auntie_huda_daily_spending",
   CHAT_HISTORY: "auntie_huda_chat_history",
@@ -75,6 +81,16 @@ export function useDailySpending() {
 
 export function useChatHistory() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  
+  const getWelcomeMessage = (): ChatMessage => {
+    const lang = (typeof window !== 'undefined' ? localStorage.getItem('auntie_huda_language') : 'en') || 'en';
+    return {
+      id: "welcome",
+      type: "auntie",
+      content: WELCOME_MESSAGES[lang as keyof typeof WELCOME_MESSAGES] || WELCOME_MESSAGES.en,
+      timestamp: new Date(),
+    };
+  };
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEYS.CHAT_HISTORY);
@@ -87,14 +103,7 @@ export function useChatHistory() {
         }))
       );
     } else {
-      const welcomeMessage: ChatMessage = {
-        id: "welcome",
-        type: "auntie",
-        content:
-          "أهلاً يا حبيبي! 👋 أنا خالتك هدى. أرسلي مصاريفك وبقولك الحقيقة. يلا، وريني شو اشتريت اليوم! 💜",
-        timestamp: new Date(),
-      };
-      setMessages([welcomeMessage]);
+      setMessages([getWelcomeMessage()]);
     }
   }, []);
 
@@ -113,16 +122,29 @@ export function useChatHistory() {
   };
 
   const clearHistory = () => {
-    const welcomeMessage: ChatMessage = {
-      id: "welcome",
-      type: "auntie",
-      content:
-        "أهلاً يا حبيبي! 👋 أنا خالتك هدى. أرسلي مصاريفك وبقولك الحقيقة. يلا، وريني شو اشتريت اليوم! 💜",
-      timestamp: new Date(),
-    };
+    const welcomeMessage = getWelcomeMessage();
     setMessages([welcomeMessage]);
     localStorage.setItem(STORAGE_KEYS.CHAT_HISTORY, JSON.stringify([welcomeMessage]));
   };
 
-  return { messages, addMessage, clearHistory };
+  const resetAll = () => {
+    // Clear chat history
+    const welcomeMessage = getWelcomeMessage();
+    setMessages([welcomeMessage]);
+    localStorage.setItem(STORAGE_KEYS.CHAT_HISTORY, JSON.stringify([welcomeMessage]));
+    
+    // Clear spending
+    localStorage.removeItem(STORAGE_KEYS.DAILY_SPENDING);
+    
+    // Clear user settings (will trigger onboarding)
+    localStorage.removeItem('auntie_huda_user');
+    
+    // Clear squad data
+    localStorage.removeItem('huda_squad');
+    
+    // Clear referral count
+    localStorage.removeItem('huda_referral_count');
+  };
+
+  return { messages, addMessage, clearHistory, resetAll };
 }

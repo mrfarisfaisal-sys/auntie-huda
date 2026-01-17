@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreVertical, Trash2, BarChart3, Trophy, Flame, RotateCcw, MessageSquare, Users, Gift } from "lucide-react";
+import { MoreVertical, Trash2, BarChart3, Trophy, Flame, RotateCcw, MessageSquare, Users, Gift, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DailySpending } from "@/types";
@@ -42,6 +42,7 @@ interface ChatHeaderProps {
   onOpenReferral?: () => void;
   onOpenSquad?: () => void;
   onOpenBadges?: () => void;
+  onResetAll?: () => void;
 }
 
 export function ChatHeader({ 
@@ -56,6 +57,7 @@ export function ChatHeader({
   onOpenReferral,
   onOpenSquad,
   onOpenBadges,
+  onResetAll,
 }: ChatHeaderProps) {
   const { language } = useLanguage();
   const t = TEXTS[language] || TEXTS.en;
@@ -190,6 +192,25 @@ export function ChatHeader({
                         <Users size={16} className="text-blue-400" />
                         {language === "ar" ? "فريق العائلة" : language === "fr" ? "Équipe Familiale" : "Family Squad"}
                       </button>
+                    )}
+                    {onResetAll && (
+                      <>
+                        <div className="border-t border-purple-500/10" />
+                        <button
+                          onClick={() => { 
+                            if (confirm(language === "ar" ? "هل أنت متأكد؟ سيتم مسح كل بياناتك وإعادة التسجيل." : language === "fr" ? "Êtes-vous sûr? Toutes vos données seront effacées." : "Are you sure? All your data will be cleared and you'll restart onboarding.")) {
+                              onResetAll();
+                              setShowMenu(false);
+                              window.location.reload();
+                            }
+                          }}
+                          className="w-full px-4 py-3 text-left text-sm hover:bg-red-500/10 flex items-center gap-3 text-red-400 transition-colors"
+                          role="menuitem"
+                        >
+                          <RefreshCw size={16} />
+                          {language === "ar" ? "إعادة تعيين كل شيء" : language === "fr" ? "Réinitialiser Tout" : "Reset Everything"}
+                        </button>
+                      </>
                     )}
                   </motion.div>
                 </>
