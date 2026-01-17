@@ -2,6 +2,40 @@
 
 import { motion } from "framer-motion";
 import { Sparkles, Target, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
+
+const TEXTS = {
+  en: {
+    savingsGoal: "Savings Goal",
+    done: "Done! 🎉",
+    of: "of",
+    todaySavings: "Today's savings",
+    addedEndOfDay: "Added to your balance at end of day ✨",
+    complete: "🎉 MashaAllah! Auntie is proud of you!",
+    halfway: "💪 More than half! Keep going champ!",
+    start: "🌱 Every penny counts. You can do it!",
+  },
+  ar: {
+    savingsGoal: "هدف التوفير",
+    done: "تم! 🎉",
+    of: "من",
+    todaySavings: "توفير اليوم",
+    addedEndOfDay: "يُضاف لرصيدك نهاية اليوم ✨",
+    complete: "🎉 ماشاء الله! خالتك فخورة فيك!",
+    halfway: "💪 أكثر من النص! كمّل يا بطل!",
+    start: "🌱 كل ريال يفرق. أنت تقدر!",
+  },
+  fr: {
+    savingsGoal: "Objectif d'épargne",
+    done: "Terminé! 🎉",
+    of: "sur",
+    todaySavings: "Économies du jour",
+    addedEndOfDay: "Ajouté à votre solde en fin de journée ✨",
+    complete: "🎉 MashaAllah! Tante est fière de vous!",
+    halfway: "💪 Plus de la moitié! Continuez!",
+    start: "🌱 Chaque centime compte. Vous pouvez le faire!",
+  },
+};
 
 interface SavingsJarProps {
   saved: number;
@@ -11,6 +45,8 @@ interface SavingsJarProps {
 }
 
 export function SavingsJar({ saved = 0, goal = 5000, currency = "SAR", todayPotential = 0 }: SavingsJarProps) {
+  const { language } = useLanguage();
+  const t = TEXTS[language] || TEXTS.en;
   const safeSaved = saved || 0;
   const safeGoal = goal || 5000;
   const percentage = Math.min((safeSaved / safeGoal) * 100, 100);
@@ -22,7 +58,7 @@ export function SavingsJar({ saved = 0, goal = 5000, currency = "SAR", todayPote
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Target size={20} className="text-purple-400" />
-          <span className="font-semibold text-white">هدف التوفير</span>
+          <span className="font-semibold text-white">{t.savingsGoal}</span>
         </div>
         {isComplete && (
           <motion.div
@@ -31,7 +67,7 @@ export function SavingsJar({ saved = 0, goal = 5000, currency = "SAR", todayPote
             className="flex items-center gap-1 bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs"
           >
             <Sparkles size={12} />
-            تم! 🎉
+            {t.done}
           </motion.div>
         )}
       </div>
@@ -86,7 +122,7 @@ export function SavingsJar({ saved = 0, goal = 5000, currency = "SAR", todayPote
           {safeSaved.toLocaleString()} <span className="text-sm text-[#8b7a9e]">{currency}</span>
         </p>
         <p className="text-xs text-[#8b7a9e]">
-          من {safeGoal.toLocaleString()} {currency}
+          {t.of} {safeGoal.toLocaleString()} {currency}
         </p>
       </div>
 
@@ -100,14 +136,14 @@ export function SavingsJar({ saved = 0, goal = 5000, currency = "SAR", todayPote
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <TrendingUp size={16} className="text-green-400" />
-              <span className="text-xs text-green-400">توفير اليوم</span>
+              <span className="text-xs text-green-400">{t.todaySavings}</span>
             </div>
             <span className="text-sm font-bold text-green-400">
               +{todayPotential} {currency}
             </span>
           </div>
           <p className="text-[10px] text-green-400/70 mt-1">
-            يُضاف لرصيدك نهاية اليوم ✨
+            {t.addedEndOfDay}
           </p>
         </motion.div>
       )}
@@ -129,10 +165,10 @@ export function SavingsJar({ saved = 0, goal = 5000, currency = "SAR", todayPote
       {/* Motivational Text */}
       <p className="text-center text-xs text-[#8b7a9e] mt-3">
         {isComplete 
-          ? "🎉 ماشاء الله! خالتك فخورة فيك!" 
+          ? t.complete 
           : percentage > 50 
-            ? "💪 أكثر من النص! كمّل يا بطل!"
-            : "🌱 كل ريال يفرق. أنت تقدر!"}
+            ? t.halfway
+            : t.start}
       </p>
     </div>
   );
