@@ -43,6 +43,15 @@ export const DIALECT_PROFILES = {
 };
 
 export const getDialectFromCurrency = (currency: string): keyof typeof DIALECT_PROFILES => {
+  // First check if user has explicitly chosen a dialect
+  if (typeof window !== 'undefined') {
+    const savedDialect = localStorage.getItem('auntie_huda_dialect');
+    if (savedDialect && savedDialect in DIALECT_PROFILES) {
+      return savedDialect as keyof typeof DIALECT_PROFILES;
+    }
+  }
+  
+  // Fallback to currency-based detection
   switch (currency) {
     case 'SAR': return 'saudi';
     case 'EGP': return 'egyptian';

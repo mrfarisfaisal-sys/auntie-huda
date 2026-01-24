@@ -54,6 +54,45 @@ const CURRENCIES = [
   { code: "OMR", nameEn: "Omani Rial", nameAr: "ريال عماني", nameFr: "Rial Omanais", flag: "🇴🇲" },
 ];
 
+const DIALECTS = [
+  { 
+    code: "saudi", 
+    flag: "🇸🇦", 
+    nameEn: "Saudi Khaltu", 
+    nameAr: "خالتو سعودية", 
+    nameFr: "Tante Saoudienne",
+    preview: "وش ذا يا ولد؟! 💀",
+    style: "Gulf dramatic with 'wesh' and 'wallah'"
+  },
+  { 
+    code: "egyptian", 
+    flag: "🇪🇬", 
+    nameEn: "Egyptian Tante", 
+    nameAr: "طنط مصرية", 
+    nameFr: "Tante Égyptienne",
+    preview: "ايه ده يا واد؟! 😱",
+    style: "Super expressive with 'ya waad'"
+  },
+  { 
+    code: "usa", 
+    flag: "🇺🇸", 
+    nameEn: "American Auntie", 
+    nameAr: "خالة أمريكية", 
+    nameFr: "Tante Américaine",
+    preview: "Oh honey NO! 💀",
+    style: "Reality TV energy & therapy jokes"
+  },
+  { 
+    code: "gulf", 
+    flag: "🇦🇪", 
+    nameEn: "Gulf Khaltu", 
+    nameAr: "خالتو خليجية", 
+    nameFr: "Tante du Golfe",
+    preview: "Walahi habibi?! 😤",
+    style: "Arabizi mix, dramatic but loving"
+  },
+];
+
 const DAILY_LIMITS = [100, 200, 300, 500, 750, 1000];
 
 const TEXTS = {
@@ -161,10 +200,15 @@ export function Onboarding({ onComplete }: OnboardingProps) {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [currency, setCurrency] = useState("SAR");
+  const [dialect, setDialect] = useState("saudi");
   const [dailyLimit, setDailyLimit] = useState(300);
   const [selectedGoal, setSelectedGoal] = useState(goals[0]);
   const [goalAmount, setGoalAmount] = useState(5000);
   const [customGoalName, setCustomGoalName] = useState("");
+  
+  const getDialectName = (d: typeof DIALECTS[0]) => {
+    return language === "ar" ? d.nameAr : language === "fr" ? d.nameFr : d.nameEn;
+  };
   
   const getCurrencyName = (c: typeof CURRENCIES[0]) => {
     return language === "ar" ? c.nameAr : language === "fr" ? c.nameFr : c.nameEn;
@@ -254,6 +298,34 @@ export function Onboarding({ onComplete }: OnboardingProps) {
               <span className="text-xl mb-1 block">{c.flag}</span>
               <span className="font-semibold text-sm">{c.code}</span>
               <span className="text-xs text-gray-400 block">{getCurrencyName(c)}</span>
+            </motion.button>
+          ))}
+        </div>
+      ),
+    },
+    {
+      title: language === "ar" ? "اختاري شخصية خالتك" : language === "fr" ? "Choisissez le style de Tante" : "Choose Your Auntie's Style",
+      subtitle: language === "ar" ? "كل وحدة لها طريقتها بالتوبيخ 🔥" : language === "fr" ? "Chacune a sa façon de gronder 🔥" : "Each one roasts differently 🔥",
+      content: (
+        <div className="grid grid-cols-2 gap-3">
+          {DIALECTS.map((d) => (
+            <motion.button
+              key={d.code}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setDialect(d.code)}
+              className={`p-4 rounded-xl border-2 transition-all text-left ${
+                dialect === d.code
+                  ? "border-purple-500 bg-purple-500/20"
+                  : "border-[#3d3d5a] bg-[#2d2d4a] hover:border-purple-500/50"
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">{d.flag}</span>
+                <span className="font-semibold text-sm">{getDialectName(d)}</span>
+              </div>
+              <p className="text-lg font-bold text-purple-300 mb-1">{d.preview}</p>
+              <p className="text-xs text-gray-400">{d.style}</p>
             </motion.button>
           ))}
         </div>
@@ -418,6 +490,8 @@ export function Onboarding({ onComplete }: OnboardingProps) {
               setStep(step + 1);
             } else {
               const goalName = selectedGoal.name === otherGoalName ? customGoalName || t.myGoal : selectedGoal.name;
+              // Save dialect to localStorage
+              localStorage.setItem('auntie_huda_dialect', dialect);
               onComplete(name, currency, dailyLimit, { name: goalName, amount: goalAmount });
             }
           }}
