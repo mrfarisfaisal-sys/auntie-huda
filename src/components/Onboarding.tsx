@@ -44,8 +44,9 @@ const SAVINGS_GOALS = {
 
 const CURRENCIES = [
   { code: "SAR", nameEn: "Saudi Riyal", nameAr: "ريال سعودي", nameFr: "Riyal Saoudien", flag: "🇸🇦" },
-  { code: "AED", nameEn: "UAE Dirham", nameAr: "درهم إماراتي", nameFr: "Dirham EAU", flag: "🇦🇪" },
   { code: "EGP", nameEn: "Egyptian Pound", nameAr: "جنيه مصري", nameFr: "Livre Égyptienne", flag: "🇪🇬" },
+  { code: "USD", nameEn: "US Dollar", nameAr: "دولار أمريكي", nameFr: "Dollar US", flag: "🇺🇸" },
+  { code: "AED", nameEn: "UAE Dirham", nameAr: "درهم إماراتي", nameFr: "Dirham EAU", flag: "🇦🇪" },
   { code: "KWD", nameEn: "Kuwaiti Dinar", nameAr: "دينار كويتي", nameFr: "Dinar Koweïtien", flag: "🇰🇼" },
   { code: "QAR", nameEn: "Qatari Riyal", nameAr: "ريال قطري", nameFr: "Riyal Qatari", flag: "🇶🇦" },
   { code: "BHD", nameEn: "Bahraini Dinar", nameAr: "دينار بحريني", nameFr: "Dinar Bahreïni", flag: "🇧🇭" },
